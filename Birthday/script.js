@@ -1,31 +1,37 @@
 const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
 const wishBtn = document.getElementById("wishBtn");
+const wishModal = document.getElementById("wishModal");
+const submitWishBtn = document.getElementById("submitWishBtn");
+const wishInput = document.getElementById("wishInput");
+const cardMessage = document.getElementById("cardMessage");
+const flames = document.querySelectorAll(".flame");
 
 let width, height, pieces;
+const colors = ["#ff6b9d", "#ffd93d", "#6bcbff", "#ffffff", "#c77dff", "#ff85a2", "#ffb347"];
 
 function resize() {
   width = canvas.width = window.innerWidth;
   height = canvas.height = window.innerHeight;
 }
 
-function createPiece() {
-  const colors = ["#ff6b9d", "#ffd93d", "#6bcbff", "#fff", "#c77dff", "#ff85a2"];
+function createPiece(extra = {}) {
   return {
     x: Math.random() * width,
     y: Math.random() * height - height,
-    size: Math.random() * 8 + 4,
-    speedY: Math.random() * 2 + 1.5,
-    speedX: Math.random() * 1.5 - 0.75,
+    size: Math.random() * 9 + 4,
+    speedY: Math.random() * 2.2 + 1.4,
+    speedX: Math.random() * 1.4 - 0.7,
     rotation: Math.random() * 360,
-    spin: Math.random() * 4 - 2,
+    spin: Math.random() * 5 - 2.5,
     color: colors[Math.floor(Math.random() * colors.length)],
-    shape: Math.random() > 0.5 ? "rect" : "circle"
+    shape: Math.random() > 0.45 ? "rect" : "circle",
+    ...extra
   };
 }
 
-function initConfetti(count = 120) {
-  pieces = Array.from({ length: count }, createPiece);
+function initConfetti(count = 140) {
+  pieces = Array.from({ length: count }, () => createPiece());
 }
 
 function drawPiece(p) {
@@ -35,7 +41,7 @@ function drawPiece(p) {
   ctx.fillStyle = p.color;
 
   if (p.shape === "rect") {
-    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.55);
   } else {
     ctx.beginPath();
     ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
@@ -53,9 +59,8 @@ function update() {
     p.x += p.speedX;
     p.rotation += p.spin;
 
-    if (p.y > height + 20) {
-      p.y = -20;
-      p.x = Math.random() * width;
+    if (p.y > height + 30) {
+      Object.assign(p, createPiece({ y: -20 }));
     }
 
     drawPiece(p);
@@ -64,20 +69,44 @@ function update() {
   requestAnimationFrame(update);
 }
 
-function burstConfetti(amount = 80) {
+function burstConfetti(amount = 140) {
   for (let i = 0; i < amount; i++) {
-    const p = createPiece();
-    p.x = width / 2 + (Math.random() * 200 - 100);
-    p.y = height / 2;
-    p.speedY = Math.random() * -6 - 2;
-    p.speedX = Math.random() * 6 - 3;
-    pieces.push(p);
+    pieces.push(
+      createPiece({
+        x: width / 2 + (Math.random() * 200 - 100),
+        y: height / 2,
+        speedY: Math.random() * -8 - 3,
+        speedX: Math.random() * 10 - 5
+      })
+    );
   }
 }
 
-window.addEventListener("resize", resize);
-wishBtn.addEventListener("click", () => burstConfetti(100));
+wishBtn.addEventListener("click", () => {
+  wishModal.classList.add("active");
+});
 
+submitWishBtn.addEventListener("click", () => {
+  const wish = wishInput.value.trim();
+  
+  wishModal.classList.remove("active");
+  
+  flames.forEach(flame => {
+    flame.classList.add("extinguished");
+  });
+  
+  burstConfetti(220);
+  
+  if (wish) {
+    cardMessage.innerHTML = `✨ Your wish has been sent to the stars: <br><strong>"${wish}"</strong><br><br>May your year ahead be absolutely magical! 💖`;
+  } else {
+    cardMessage.innerHTML = `✨ *Woosh!* The candles are blown out! ✨<br><br>May all your quiet hopes and dreams find their way to you this year! 💖`;
+  }
+  
+  wishBtn.outerHTML = `<div class="wished-note">🎂 Happy Birthday, Kiki! 🎂</div>`;
+});
+
+window.addEventListener("resize", resize);
 resize();
 initConfetti();
 update();
