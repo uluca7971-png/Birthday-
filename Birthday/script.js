@@ -6,6 +6,7 @@ const submitWishBtn = document.getElementById("submitWishBtn");
 const wishInput = document.getElementById("wishInput");
 const cardMessage = document.getElementById("cardMessage");
 const flames = document.querySelectorAll(".flame");
+const errorMsg = document.getElementById("error-msg");
 
 let width, height, pieces;
 const colors = ["#ff6b9d", "#ffd93d", "#6bcbff", "#ffffff", "#c77dff", "#ff85a2", "#ffb347"];
@@ -82,28 +83,49 @@ function burstConfetti(amount = 140) {
   }
 }
 
+// Open modal
 wishBtn.addEventListener("click", () => {
   wishModal.classList.add("active");
+  // Clean up any error states when opening the modal
+  wishInput.classList.remove("error");
+  errorMsg.style.display = "none";
 });
 
+// Blow out candles submit action
 submitWishBtn.addEventListener("click", () => {
   const wish = wishInput.value.trim();
   
+  // If input is empty, reject submission and show error
+  if (!wish) {
+    wishInput.classList.add("error");
+    errorMsg.style.display = "block";
+    return; // Stop the function here so candles stay lit!
+  }
+  
+  // If they typed something, proceed with blowing out the candles!
   wishModal.classList.remove("active");
   
+  // Extinguish the flames
   flames.forEach(flame => {
     flame.classList.add("extinguished");
   });
   
+  // Explode confetti
   burstConfetti(220);
   
-  if (wish) {
-    cardMessage.innerHTML = `✨ Your wish has been sent to the stars: <br><strong>"${wish}"</strong><br><br>May your year ahead be absolutely magical! 💖`;
-  } else {
-    cardMessage.innerHTML = `✨ *Woosh!* The candles are blown out! ✨<br><br>May all your quiet hopes and dreams find their way to you this year! 💖`;
-  }
+  // Update birthday text
+  cardMessage.innerHTML = `✨ Your wish has been sent to the stars: <br><strong>"${wish}"</strong><br><br>May your year ahead be absolutely magical! 💖`;
   
+  // Replace the make-a-wish button with a sweet birthday wish note
   wishBtn.outerHTML = `<div class="wished-note">🎂 Happy Birthday, Kiki! 🎂</div>`;
+});
+
+// Remove error styling instantly when user starts typing
+wishInput.addEventListener("input", () => {
+  if (wishInput.value.trim().length > 0) {
+    wishInput.classList.remove("error");
+    errorMsg.style.display = "none";
+  }
 });
 
 window.addEventListener("resize", resize);
