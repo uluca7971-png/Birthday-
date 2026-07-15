@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Happy Birthday Kiki! 🎂</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
@@ -62,7 +62,6 @@
           <div class="filling"></div>
         </div>
         
-        <!-- Bottom layer with beautiful rounded corners and built-in shadow -->
         <div class="layer bot"></div>
       </div>
     </div>
@@ -86,7 +85,9 @@
     <div class="modal">
       <h3>✨ Close your eyes and... ✨</h3>
       <p>Type your birthday wish in the box below:</p>
-      <input type="text" id="wishInput" placeholder="My secret birthday wish is..." autocomplete="off">
+      <!-- Added required attribute and feedback styling -->
+      <input type="text" id="wishInput" placeholder="My secret birthday wish is..." autocomplete="off" required>
+      <div id="error-msg" style="color: #ff3366; font-size: 0.85rem; margin-top: -15px; margin-bottom: 15px; display: none; font-weight: bold;">Please type a wish first! 💖</div>
       <button id="submitWishBtn">Blow out candles! 🕯️💨</button>
     </div>
   </div>
