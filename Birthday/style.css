@@ -11,8 +11,9 @@ body {
   justify-content: center;
   font-family: "Quicksand", "Segoe UI", sans-serif;
   background: linear-gradient(135deg, #5b4bff 0%, #9b59ff 35%, #ff6bb5 70%, #ffb347 100%);
-  overflow: hidden;
-  padding: 24px;
+  overflow-x: hidden;
+  overflow-y: auto; /* Allows smooth scrolling on exceptionally small phones */
+  padding: 16px;
   position: relative;
 }
 
@@ -62,12 +63,13 @@ body {
   100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
 }
 
-/* Glassmorphism Card Frame */
+/* Glassmorphism Card Frame - Perfect for both Desktop & Mobile */
 .card {
   position: relative;
   z-index: 5;
-  width: min(92vw, 480px);
-  padding: 52px 34px 38px;
+  width: 100%;
+  max-width: 440px; /* Looks beautiful on desktop */
+  padding: 40px 24px 30px;
   text-align: center;
   background: rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(22px);
@@ -81,7 +83,7 @@ body {
 }
 
 @keyframes popIn {
-  from { opacity: 0; transform: translateY(50px) scale(0.92); }
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
@@ -105,70 +107,84 @@ body {
 .balloons {
   position: relative;
   width: 100%;
-  height: 50px;
-  margin-top: -20px;
+  height: 45px;
+  margin-top: -15px;
   z-index: 10;
 }
 
 .balloon {
   position: absolute;
-  width: 36px;
-  height: 46px;
+  width: 32px;
+  height: 42px;
   border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
   animation: bob 3.2s ease-in-out infinite;
-  box-shadow: inset -8px -8px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: inset -6px -6px 12px rgba(0, 0, 0, 0.08);
 }
 
 .balloon::after {
   content: "";
   position: absolute;
-  bottom: -22px;
+  bottom: -18px;
   left: 50%;
   width: 2px;
-  height: 22px;
+  height: 18px;
   background: rgba(255, 255, 255, 0.55);
   transform: translateX(-50%);
 }
 
-.b1 { background: linear-gradient(#ff8fab, #ff4d8d); left: 14%; }
+.b1 { background: linear-gradient(#ff8fab, #ff4d8d); left: 10%; }
 .b2 { background: linear-gradient(#ffe066, #ffb703); left: 50%; transform: translateX(-50%); animation-delay: 0.4s; }
-.b3 { background: linear-gradient(#7dd3fc, #38bdf8); right: 14%; animation-delay: 0.8s; }
+.b3 { background: linear-gradient(#7dd3fc, #38bdf8); right: 10%; animation-delay: 0.8s; }
 
 @keyframes bob {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
+  50% { transform: translateY(-12px); }
 }
 
 .b2 { animation-name: bobCenter; }
 
 @keyframes bobCenter {
   0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-14px); }
+  50% { transform: translateX(-50%) translateY(-12px); }
 }
 
-/* Beautiful Cake Area - No Plate */
+/* responsive adjustments for smaller phones */
+@media (max-width: 380px) {
+  .card {
+    padding: 30px 16px 24px;
+  }
+  .cake-wrap {
+    transform: scale(0.85);
+    margin: 15px auto 10px !important;
+  }
+  .balloons {
+    height: 35px;
+  }
+}
+
+/* Beautiful Cake Area - Sized to fit all mobile devices */
 .cake-wrap {
-  margin: 34px auto 22px;
+  margin: 28px auto 18px;
 }
 
 .cake {
   position: relative;
-  width: 190px;
+  width: 180px;
   margin: 0 auto;
 }
 
 .candles {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 18px;
   margin-bottom: -2px;
   position: relative;
   z-index: 10;
 }
 
 .candle {
-  width: 9px;
-  height: 35px;
+  width: 8px;
+  height: 32px;
   background: repeating-linear-gradient(45deg, #ffffff, #ffffff 5px, #ff4d8d 5px, #ff4d8d 10px);
   border-radius: 3px 3px 0 0;
   box-shadow: inset -2px 0 5px rgba(0,0,0,0.15);
@@ -179,9 +195,9 @@ body {
   position: absolute;
   top: -18px;
   left: 50%;
-  width: 14px;
-  height: 20px;
-  margin-left: -7px;
+  width: 13px;
+  height: 18px;
+  margin-left: -6.5px;
   background: radial-gradient(circle, #fff 0%, #ffe066 35%, #ff922b 75%, transparent 100%);
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
   animation: flicker 0.12s ease-in-out infinite alternate;
@@ -197,14 +213,14 @@ body {
 
 @keyframes flicker {
   from { transform: scale(1) rotate(-3deg); }
-  to { transform: scale(1.12) rotate(3deg); }
+  to { transform: scale(1.1) rotate(3deg); }
 }
 
 /* Frosting drops */
 .frosting {
   position: relative;
-  width: 172px;
-  height: 18px;
+  width: 162px;
+  height: 16px;
   background: #ffffff;
   border-radius: 10px 10px 0 0;
   margin: 0 auto;
@@ -214,16 +230,16 @@ body {
 .drip {
   position: absolute;
   background: #ffffff;
-  width: 14px;
-  height: 16px;
+  width: 13px;
+  height: 14px;
   border-radius: 0 0 50% 50%;
-  top: 10px;
+  top: 9px;
 }
-.d1 { left: 10px; height: 18px; }
-.d2 { left: 45px; height: 24px; }
-.d3 { left: 80px; height: 16px; }
-.d4 { left: 115px; height: 22px; }
-.d5 { left: 148px; height: 18px; }
+.d1 { left: 9px; height: 16px; }
+.d2 { left: 42px; height: 22px; }
+.d3 { left: 75px; height: 14px; }
+.d4 { left: 108px; height: 20px; }
+.d5 { left: 140px; height: 16px; }
 
 .layer {
   margin: 0 auto;
@@ -231,8 +247,8 @@ body {
 }
 
 .top {
-  width: 170px;
-  height: 40px;
+  width: 160px;
+  height: 38px;
   background: linear-gradient(135deg, #ff8fab 0%, #ff5d8f 100%);
   border-radius: 4px 4px 0 0;
   z-index: 4;
@@ -242,11 +258,11 @@ body {
 .cream-dots {
   display: flex;
   justify-content: space-around;
-  padding: 2px 20px 0;
+  padding: 2px 18px 0;
 }
 .cream-dots span {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   background: #ff3366;
   border-radius: 50% 50% 45% 45%;
   border: 1px solid #ff1a53;
@@ -255,8 +271,8 @@ body {
 
 /* Mid layer with sprinkles */
 .mid {
-  width: 180px;
-  height: 38px;
+  width: 170px;
+  height: 36px;
   background: linear-gradient(135deg, #f7cad0 0%, #f2b5be 100%);
   margin-top: -2px;
   z-index: 3;
@@ -271,17 +287,17 @@ body {
 
 .sprinkles span {
   position: absolute;
-  width: 8px;
+  width: 7px;
   height: 3px;
   border-radius: 4px;
   opacity: 0.85;
 }
 
 .sp1 { background: #ffd93d; top: 10px; left: 15px; transform: rotate(15deg); }
-.sp2 { background: #6bcbff; top: 22px; left: 45px; transform: rotate(-30deg); }
-.sp3 { background: #ff85a2; top: 8px; left: 95px; transform: rotate(45deg); }
-.sp4 { background: #c77dff; top: 20px; left: 130px; transform: rotate(-15deg); }
-.sp5 { background: #ffd93d; top: 12px; left: 160px; transform: rotate(60deg); }
+.sp2 { background: #6bcbff; top: 20px; left: 45px; transform: rotate(-30deg); }
+.sp3 { background: #ff85a2; top: 8px; left: 90px; transform: rotate(45deg); }
+.sp4 { background: #c77dff; top: 18px; left: 120px; transform: rotate(-15deg); }
+.sp5 { background: #ffd93d; top: 12px; left: 145px; transform: rotate(60deg); }
 
 .filling {
   position: absolute;
@@ -291,45 +307,45 @@ body {
   background: #ffeedd;
 }
 
-/* Bottom layer sits directly on the glass card with smooth rounded corners */
+/* Bottom layer */
 .bot {
-  width: 190px;
-  height: 44px;
+  width: 180px;
+  height: 40px;
   background: linear-gradient(135deg, #f08080 0%, #e06c6c 100%);
-  border-radius: 0 0 20px 20px; /* Soft round corners replace the plate */
+  border-radius: 0 0 18px 18px;
   margin-top: -2px;
   z-index: 2;
   box-shadow: 
     inset 0 4px 5px rgba(255,255,255,0.3), 
     inset -10px 0 15px rgba(0,0,0,0.08),
-    0 12px 28px rgba(0, 0, 0, 0.25); /* The cake's native 3D soft shadow */
+    0 12px 28px rgba(0, 0, 0, 0.25);
 }
 
 /* Typography & Content styling */
 .tag {
   display: inline-block;
-  padding: 8px 16px;
-  margin-top: 18px; 
-  margin-bottom: 10px;
+  padding: 6px 14px;
+  margin-top: 14px; 
+  margin-bottom: 8px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.18);
   color: #fff;
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   letter-spacing: 0.5px;
 }
 
 h1 {
-  font-size: clamp(2rem, 6vw, 2.7rem);
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
   color: #fff;
   text-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   font-weight: 700;
 }
 
 .name {
-  font-size: clamp(2.4rem, 8vw, 3.5rem);
+  font-size: clamp(2.2rem, 7vw, 3.2rem);
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   background: linear-gradient(90deg, #fff 0%, #ffe066 35%, #fff 70%, #ffd6ff 100%);
   background-size: 220% auto;
   -webkit-background-clip: text;
@@ -345,17 +361,17 @@ h1 {
 
 .message {
   color: rgba(255, 255, 255, 0.95);
-  font-size: 1.05rem;
-  line-height: 1.75;
-  max-width: 390px;
-  margin: 0 auto 28px;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  max-width: 360px;
+  margin: 0 auto 24px;
   transition: all 0.5s ease-in-out;
 }
 
 /* Birthday Wish Interactive Button */
 .wish-btn {
   border: none;
-  padding: 14px 28px 10px;
+  padding: 12px 24px 8px;
   border-radius: 999px;
   cursor: pointer;
   background: linear-gradient(180deg, #ffffff, #f3f0ff);
@@ -369,12 +385,12 @@ h1 {
 }
 
 .wish-btn span {
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
 }
 
 .wish-btn small {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   opacity: 0.75;
 }
 
@@ -388,7 +404,7 @@ h1 {
 }
 
 .wished-note {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: bold;
   color: #ffffff;
   text-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -417,8 +433,8 @@ h1 {
 
 .modal {
   background: #ffffff;
-  width: min(90vw, 400px);
-  padding: 30px;
+  width: min(90vw, 380px);
+  padding: 24px;
   border-radius: 24px;
   text-align: center;
   box-shadow: 0 20px 50px rgba(0,0,0,0.3);
@@ -432,14 +448,14 @@ h1 {
 
 .modal h3 {
   color: #7c3aed;
-  font-size: 1.4rem;
-  margin-bottom: 10px;
+  font-size: 1.3rem;
+  margin-bottom: 8px;
 }
 
 .modal p {
   color: #555555;
-  font-size: 0.95rem;
-  margin-bottom: 20px;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
 }
 
 .modal input {
@@ -456,6 +472,12 @@ h1 {
 
 .modal input:focus {
   border-color: #7c3aed;
+}
+
+/* Red border style if they try to click submit while empty */
+.modal input.error {
+  border-color: #ff3366;
+  background-color: #fff0f3;
 }
 
 .modal button {
