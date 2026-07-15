@@ -3,46 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday!</title>
+  <title>Happy Birthday Kiki! 🎂</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
   <canvas id="confetti"></canvas>
 
-  <div class="floating-shapes">
-    <span></span><span></span><span></span><span></span><span></span>
+  <div class="bg-glow g1"></div>
+  <div class="bg-glow g2"></div>
+  <div class="bg-glow g3"></div>
+
+  <div class="hearts">
+    <span>💗</span><span>💖</span><span>💝</span><span>✨</span><span>🎀</span>
   </div>
 
   <main class="card">
+    <div class="sparkle s1">✦</div>
+    <div class="sparkle s2">✦</div>
+    <div class="sparkle s3">✦</div>
+
+    <!-- Balloon decoration -->
     <div class="balloons">
       <div class="balloon b1"></div>
       <div class="balloon b2"></div>
       <div class="balloon b3"></div>
     </div>
 
-    <div class="cake">
-      <div class="candles">
-        <div class="candle"><div class="flame"></div></div>
-        <div class="candle"><div class="flame"></div></div>
-        <div class="candle"><div class="flame"></div></div>
+    <!-- Beautiful Re-designed Cake -->
+    <div class="cake-wrap">
+      <div class="cake">
+        <div class="candles">
+          <div class="candle"><div class="flame"></div></div>
+          <div class="candle"><div class="flame"></div></div>
+          <div class="candle"><div class="flame"></div></div>
+        </div>
+        
+        <!-- White Frosting Drips -->
+        <div class="frosting">
+          <div class="drip d1"></div>
+          <div class="drip d2"></div>
+          <div class="drip d3"></div>
+          <div class="drip d4"></div>
+          <div class="drip d5"></div>
+        </div>
+        
+        <div class="layer top">
+          <div class="cream-dots">
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        
+        <div class="layer mid">
+          <!-- Colorful Sprinkles -->
+          <div class="sprinkles">
+            <span class="sp1"></span><span class="sp2"></span><span class="sp3"></span><span class="sp4"></span><span class="sp5"></span>
+          </div>
+          <div class="filling"></div>
+        </div>
+        
+        <!-- Bottom layer with beautiful rounded corners and built-in shadow -->
+        <div class="layer bot"></div>
       </div>
-      <div class="frosting"></div>
-      <div class="layer layer-top"></div>
-      <div class="layer layer-middle"></div>
-      <div class="layer layer-bottom"></div>
-      <div class="plate"></div>
     </div>
 
-    <p class="subtitle">🎉 Today is your special day 🎉</p>
+    <p class="tag">🎉 Today is your special day 🎉</p>
     <h1>Happy Birthday!</h1>
     <h2 class="name">Kiki</h2>
-    <p class="message">
-      Wishing you a day filled with laughter, love, and all the little things that make you smile.
+    <p class="message" id="cardMessage">
+      Wishing you a day filled with laughter, love, and everything that makes you smile.
       I'm so glad we're friends — you deserve the happiest birthday ever! 💖
     </p>
 
-    <button id="wishBtn" class="wish-btn">Make a wish! ✨</button>
+    <button id="wishBtn" class="wish-btn">
+      <span>Make a wish!</span>
+      <small>✨ tap me ✨</small>
+    </button>
   </main>
+
+  <!-- Interactive Modal popup for making a wish -->
+  <div class="modal-overlay" id="wishModal">
+    <div class="modal">
+      <h3>✨ Close your eyes and... ✨</h3>
+      <p>Type your birthday wish in the box below:</p>
+      <input type="text" id="wishInput" placeholder="My secret birthday wish is..." autocomplete="off">
+      <button id="submitWishBtn">Blow out candles! 🕯️💨</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
