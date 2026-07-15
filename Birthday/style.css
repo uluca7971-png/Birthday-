@@ -1,0 +1,247 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 45%, #f093fb 100%);
+  overflow: hidden;
+  padding: 20px;
+}
+
+#confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.floating-shapes span {
+  position: fixed;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  animation: float 8s ease-in-out infinite;
+}
+
+.floating-shapes span:nth-child(1) { width: 120px; height: 120px; top: 10%; left: 8%; animation-delay: 0s; }
+.floating-shapes span:nth-child(2) { width: 80px; height: 80px; top: 70%; left: 15%; animation-delay: 1s; }
+.floating-shapes span:nth-child(3) { width: 150px; height: 150px; top: 20%; right: 10%; animation-delay: 2s; }
+.floating-shapes span:nth-child(4) { width: 60px; height: 60px; bottom: 15%; right: 20%; animation-delay: 3s; }
+.floating-shapes span:nth-child(5) { width: 100px; height: 100px; bottom: 30%; left: 40%; animation-delay: 1.5s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-25px) scale(1.05); }
+}
+
+.card {
+  position: relative;
+  z-index: 5;
+  width: min(92vw, 520px);
+  padding: 48px 36px 40px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 28px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  animation: cardIn 1s ease-out;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(40px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.balloons {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  height: 0;
+}
+
+.balloon {
+  position: absolute;
+  width: 34px;
+  height: 44px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: bob 3s ease-in-out infinite;
+}
+
+.balloon::after {
+  content: "";
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  width: 2px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.6);
+  transform: translateX(-50%);
+}
+
+.b1 { background: #ff6b9d; left: 12%; animation-delay: 0s; }
+.b2 { background: #ffd93d; left: 50%; transform: translateX(-50%); animation-delay: 0.5s; }
+.b3 { background: #6bcbff; right: 12%; animation-delay: 1s; }
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.cake {
+  position: relative;
+  width: 180px;
+  margin: 30px auto 24px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.candles {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 6px;
+}
+
+.candle {
+  width: 8px;
+  height: 28px;
+  background: linear-gradient(#fff, #ffe066);
+  border-radius: 3px;
+  position: relative;
+}
+
+.flame {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  width: 12px;
+  height: 18px;
+  margin-left: -6px;
+  background: radial-gradient(circle, #fff 0%, #ffd700 30%, #ff6b00 70%, transparent 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: flicker 0.15s ease-in-out infinite alternate;
+}
+
+@keyframes flicker {
+  from { transform: scale(1) rotate(-2deg); opacity: 1; }
+  to { transform: scale(1.1) rotate(2deg); opacity: 0.85; }
+}
+
+.frosting {
+  width: 100%;
+  height: 18px;
+  background: #ff85a2;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: -4px;
+  position: relative;
+  z-index: 3;
+}
+
+.layer {
+  margin: 0 auto;
+  border-radius: 8px;
+  position: relative;
+}
+
+.layer-top {
+  width: 160px;
+  height: 36px;
+  background: linear-gradient(#ffb3c6, #ff85a2);
+  z-index: 2;
+}
+
+.layer-middle {
+  width: 170px;
+  height: 32px;
+  background: linear-gradient(#ffc8dd, #ffafcc);
+  margin-top: -4px;
+  z-index: 1;
+}
+
+.layer-bottom {
+  width: 180px;
+  height: 38px;
+  background: linear-gradient(#cdb4db, #a2d2ff);
+  margin-top: -4px;
+}
+
+.plate {
+  width: 200px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  margin: 8px auto 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+h1 {
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  color: #fff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+
+.name {
+  font-size: clamp(2.2rem, 7vw, 3.2rem);
+  background: linear-gradient(90deg, #fff 0%, #ffe066 50%, #fff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shine 3s linear infinite;
+  margin-bottom: 16px;
+  font-weight: 800;
+}
+
+@keyframes shine {
+  to { background-position: 200% center; }
+}
+
+.message {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 420px;
+  margin: 0 auto 28px;
+}
+
+.wish-btn {
+  border: none;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #764ba2;
+  background: #fff;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wish-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.wish-btn:active {
+  transform: scale(0.98);
+}
